@@ -1,3 +1,11 @@
+## Added import attributes/assertions support
+
+```
+npm i @rzbz/gulp-javascript-obfuscator
+```
+
+---
+
 # gulp-javascript-obfuscator
 
 Gulp plugin for [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator)

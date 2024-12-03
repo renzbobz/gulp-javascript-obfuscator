@@ -1,6 +1,6 @@
 const through2 = require('through2');
 const Vinyl = require('vinyl');
-const JavaScriptObfuscator = require('javascript-obfuscator');
+const JavaScriptObfuscator = require('@rzbz/javascript-obfuscator');
 const PluginError = require('plugin-error');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 
@@ -16,7 +16,7 @@ module.exports = function gulpJavaScriptObfuscator (options = {}) {
 
 		try {
 			const obfuscationResult = JavaScriptObfuscator.obfuscate(String(file.contents), options);
-			file.contents = new Buffer(obfuscationResult.getObfuscatedCode());
+			file.contents = Buffer.from(obfuscationResult.getObfuscatedCode());
 			if (options.sourceMap && options.sourceMapMode !== 'inline') {
 				if ( file.sourceMap ) {
 					const sourceMap = JSON.parse(obfuscationResult.getSourceMap());
@@ -28,7 +28,7 @@ module.exports = function gulpJavaScriptObfuscator (options = {}) {
 						cwd: file.cwd,
 						base: file.base,
 						path: file.path + '.map',
-						contents: new Buffer(obfuscationResult.getSourceMap())
+						contents: Buffer.from(obfuscationResult.getSourceMap())
 					}))
 				}
 			}
